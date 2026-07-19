@@ -633,6 +633,8 @@ export const MovePlanSchema = z
     }
   });
 
+export { EvidenceRefSchema } from "./primitives";
+
 export type Mission = z.infer<typeof MissionSchema>;
 export type MissionStatus = z.infer<typeof MissionStatusSchema>;
 export type UserApproval = z.infer<typeof UserApprovalSchema>;
