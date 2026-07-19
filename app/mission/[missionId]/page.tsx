@@ -20,7 +20,7 @@ export interface MissionPageProps {
 const missionData = {
   "m-1": {
     name: "Repair walnut chair",
-    status: "in_progress" as const,
+    status: "in_progress",
     objects: ["obj-1"],
     steps: [
       { id: "st-1", label: "Assess damage", status: "complete" as const },
