@@ -197,3 +197,6 @@ export const EntityTypeSchema = z.enum([
 export type OwnerScope = z.infer<typeof OwnerScopeSchema>;
 export type SyncMeta = z.infer<typeof SyncMetaSchema>;
 export type EntityType = z.infer<typeof EntityTypeSchema>;
+export type Confidence = z.infer<typeof ConfidenceSchema>;
+export type SourceRef = z.infer<typeof SourceRefSchema>;
+export type SafetyFlag = z.infer<typeof SafetyFlagSchema>;

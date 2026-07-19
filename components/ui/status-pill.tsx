@@ -13,7 +13,7 @@ const tones: Record<Tone, string> = {
 };
 
 export interface StatusPillProps extends HTMLAttributes<HTMLSpanElement> {
-  tone?: Tone;
+  tone?: Tone | undefined;
 }
 
 export function StatusPill({

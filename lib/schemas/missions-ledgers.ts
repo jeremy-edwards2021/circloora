@@ -649,3 +649,5 @@ export type CreditClaim = z.infer<typeof CreditClaimSchema>;
 export type CreditLedgerEntry = z.infer<typeof CreditLedgerEntrySchema>;
 export type LocalPathwaySource = z.infer<typeof LocalPathwaySourceSchema>;
 export type MovePlan = z.infer<typeof MovePlanSchema>;
+export type VerificationLevel = z.infer<typeof VerificationLevelSchema>;
+export type CircularActionOutcome = z.infer<typeof CircularActionOutcomeSchema>;

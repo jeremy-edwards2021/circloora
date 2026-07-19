@@ -9,7 +9,7 @@ const verifierRequirementLabels: Record<Mission["verificationRequirement"], stri
   not_required: "No verification needed",
 };
 
-const verifierRequirementTones: Record<Mission["verificationRequirement"], "neutral" | "positive" | "warning"> = {
+const verifierRequirementTones: Record<Mission["verificationRequirement"], "neutral" | "accent" | "positive" | "warning"> = {
   required: "warning",
   recommended: "accent",
   not_required: "positive",
