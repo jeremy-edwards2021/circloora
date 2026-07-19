@@ -1,0 +1,25 @@
+# dependencies
+/node_modules
+
+# Next.js
+/.next
+/out
+
+# production and test artifacts
+/build
+/coverage
+/playwright-report
+/test-results
+/release-artifacts
+
+# environment files (the example is safe to commit)
+.env*
+!.env.example
+
+# local deployment metadata
+.vercel
+
+# logs and OS files
+*.log
+.DS_Store
+*.tsbuildinfo
