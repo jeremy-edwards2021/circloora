@@ -6,10 +6,34 @@ import {
   isPrivateAppPath,
 } from "@/lib/security/headers";
 
+const MUTATE_METHODS = new Set(["POST", "PUT", "PATCH", "DELETE"]);
+
 export function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
   const nonce = crypto.randomUUID().replaceAll("-", "");
   const isPreview = process.env.VERCEL_ENV === "preview";
   const isProduction = process.env.NODE_ENV === "production" && !isPreview;
+
+  if (MUTATE_METHODS.has(request.method) && pathname.startsWith("/api/")) {
+    const origin = request.headers.get("origin");
+    const host = request.headers.get("host");
+    const expectedOrigin = process.env.NEXT_PUBLIC_APP_URL
+      ? new URL(process.env.NEXT_PUBLIC_APP_URL).origin
+      : `${request.nextUrl.protocol}//${request.nextUrl.host}`;
+    if (origin && origin !== expectedOrigin) {
+      return new NextResponse(
+        JSON.stringify({ ok: false, error: { code: "origin_rejected" } }),
+        { status: 400, headers: { "content-type": "application/json" } },
+      );
+    }
+    if (host && host !== request.nextUrl.host) {
+      return new NextResponse(
+        JSON.stringify({ ok: false, error: { code: "host_rejected" } }),
+        { status: 400, headers: { "content-type": "application/json" } },
+      );
+    }
+  }
+
   const headers = buildSecurityHeaders({
     connectOrigins: enabledBrowserConnectOrigins(process.env),
     enableHsts: process.env.ENABLE_HSTS === "true",
@@ -17,7 +41,7 @@ export function proxy(request: NextRequest) {
     isPreview,
     isProduction,
     nonce,
-    privateRoute: isPrivateAppPath(request.nextUrl.pathname),
+    privateRoute: isPrivateAppPath(pathname),
   });
 
   const requestHeaders = new Headers(request.headers);
